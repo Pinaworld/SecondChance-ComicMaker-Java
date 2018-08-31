@@ -1,32 +1,39 @@
 package org.comicteam.models;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.text.Font;
-import org.comicteam.layouts.ComicLayout;
+import org.comicteam.layouts.*;
 
-public final class Text extends ComicModel {
+import javafx.scene.canvas.*;
+import javafx.scene.text.*;
+
+public final class Text extends ComicModel
+{
     private String text;
     private Font font;
 
-    public Text(Canvas canvas, ComicLayout layout, int background, String text, Font font) {
-        super(text, canvas, layout, background);
+    public Text (ComicPanel comicPanel, Canvas canvas, ComicLayout layout, int background, String text, Font font)
+    {
+        super(text, canvas, comicPanel, layout, background);
         this.text = text;
         this.font = font;
     }
 
-    public String getText() {
+    public String getText ()
+    {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText (String text)
+    {
         this.text = text;
     }
 
-    public Font getFont() {
+    public Font getFont ()
+    {
         return font;
     }
 
-    public void setFont(Font font) {
+    public void setFont (Font font)
+    {
         this.font = font;
     }
 }

@@ -1,55 +1,80 @@
 package org.comicteam.models;
 
-import javafx.scene.canvas.Canvas;
-import org.comicteam.layouts.ComicLayout;
+import org.comicteam.layouts.*;
 
-public class ComicModel {
+import javafx.scene.canvas.*;
+import javafx.scene.layout.*;
+
+public class ComicModel extends Region
+{
     protected String name;
     protected Canvas canvas;
+    protected ComicPanel comicPanel;
     protected ComicLayout layout;
-    protected int background;
+    protected int bg;
 
-    public ComicModel(String name, Canvas canvas, ComicLayout layout, int background) {
+    public ComicModel (String name, Canvas canvas, ComicPanel comicPanel, ComicLayout layout, int background)
+    {
         this.name = name;
         this.canvas = canvas;
+        this.comicPanel = comicPanel;
         this.layout = layout;
-        this.background = background;
+        this.bg = background;
     }
 
-    public String getName() {
+    public ComicPanel getComicPanel ()
+    {
+        return comicPanel;
+    }
+
+    public void setComicPanel (ComicPanel comicPanel)
+    {
+        this.comicPanel = comicPanel;
+    }
+
+    public String getName ()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name)
+    {
         this.name = name;
     }
 
-    public Canvas getCanvas() {
+    public Canvas getCanvas ()
+    {
         return canvas;
     }
 
-    public void setCanvas(Canvas canvas) {
+    public void setCanvas (Canvas canvas)
+    {
         this.canvas = canvas;
     }
 
-    public ComicLayout getLayout() {
+    public ComicLayout getLayout ()
+    {
         return layout;
     }
 
-    public void setLayout(ComicLayout layout) {
+    public void setLayout (ComicLayout layout)
+    {
         this.layout = layout;
     }
 
-    public int getBackground() {
-        return background;
+    public int getBG ()
+    {
+        return bg;
     }
 
-    public void setBackground(int background) {
-        this.background = background;
+    public void setBG (int background)
+    {
+        this.bg = background;
     }
 
     @Override
-    public String toString() {
+    public String toString ()
+    {
         return name;
     }
 }
