@@ -1,29 +1,18 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
+import org.comicteam.layouts.*;
+import org.comicteam.models.*;
+
+import javafx.fxml.*;
+import javafx.scene.canvas.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
-import org.comicteam.helpers.MM;
-import org.comicteam.layouts.ComicLayout;
-import org.comicteam.layouts.Position;
-import org.comicteam.layouts.Size;
-import org.comicteam.models.ComicModel;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 
-import javax.imageio.ImageIO;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-
-public class ModelEditorController {
+public class ModelEditorController
+{
     @FXML
     private Pane drawingPane;
 
@@ -54,6 +43,8 @@ public class ModelEditorController {
 
     private Canvas c;
 
+    protected ComicPanel comicPanel;
+
     //double x, y;
 
     @FXML
@@ -61,9 +52,11 @@ public class ModelEditorController {
     //@FXML
     //private Button saveButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(ModelEditorController.class, this);
 
+        comicPanel = FXMLHelper.getSelectedComicPanel();
         toggles = new ToggleGroup();
         penButton.setSelected(true);
         toggles.getToggles().add(eraserButton);
@@ -73,10 +66,11 @@ public class ModelEditorController {
         prepareCanvas();
     }
 
-    private void prepareCanvas() {
+    private void prepareCanvas ()
+    {
         drawingPane.setBorder(FXMLHelper.defaultBorder);
 
-        c = new Canvas(610, 540);
+        c = new Canvas(650, 550);
         colorPicker.setValue(Color.BLACK);
 
         colorPicker.setOnAction(e -> {
@@ -88,11 +82,16 @@ public class ModelEditorController {
             double x1 = e.getSceneX() - drawingPane.getLayoutX();
             double y1 = e.getSceneY() - drawingPane.getLayoutY();
 
-            if (toggles.getSelectedToggle() == eraserButton) {
+            if (toggles.getSelectedToggle() == eraserButton)
+            {
                 c.getGraphicsContext2D().clearRect(x1, y1, eraserSlider.getValue(), eraserSlider.getValue());
-            } else if (toggles.getSelectedToggle() == penButton) {
+            }
+            else if (toggles.getSelectedToggle() == penButton)
+            {
                 c.getGraphicsContext2D().fillOval(x1, y1, penSlider.getValue(), penSlider.getValue());
-            } else if (toggles.getSelectedToggle() == lineButton) {
+            }
+            else if (toggles.getSelectedToggle() == lineButton)
+            {
                 drawingPane.setOnMouseReleased(r -> {
                     double xr = e.getSceneX() - drawingPane.getLayoutX();
                     double yr = e.getSceneY() - drawingPane.getLayoutY();
@@ -115,7 +114,8 @@ public class ModelEditorController {
     }
 
     @FXML
-    public void saveButtonClick() {
+    public void saveButtonClick ()
+    {
         //trim canvas
         /*WritableImage im = new WritableImage((int) c.getWidth(), (int) c.getHeight());
 
@@ -133,7 +133,22 @@ public class ModelEditorController {
             }
         }*/
 
+        int width = (int) (comicPanel.getLayout().getSize().getHorizontal() * 100 / c.getWidth());
+        int height = (int) (comicPanel.getLayout().getSize().getVertical() * 100 / c.getHeight());
+        c.setScaleX(comicPanel.getLayout().getSize().getHorizontal() / c.getWidth());
+        c.setScaleY(comicPanel.getLayout().getSize().getVertical() / c.getHeight());
+
         ComicModel model = new ComicModel(
+                modelNameField.getText(),
+                c,
+                comicPanel,
+                new ComicLayout(
+                        comicPanel.getLayout().getPosition(),
+                        new Size(width, height)
+                ),
+                0);
+
+/*        ComicModel model = new ComicModel(
                 modelNameField.getText(),
                 c,
                 new ComicLayout(
@@ -143,7 +158,7 @@ public class ModelEditorController {
                                 MM.toMM((int) c.getHeight())
                         )
                 ),
-                0);
+                0);*/
 
         FXMLHelper.getSelectedComicPanel().getModels().add(model);
 
