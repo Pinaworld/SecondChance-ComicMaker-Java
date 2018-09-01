@@ -5,12 +5,10 @@ import java.io.*;
 import javafx.application.*;
 import javafx.fxml.*;
 import javafx.scene.*;
-import javafx.scene.image.*;
 import javafx.stage.*;
 
-public class SettingsForm extends Application
+public class SpeechBubbleForm extends Application
 {
-
     @Override
     public void start (Stage primaryStage)
     {
@@ -18,7 +16,7 @@ public class SettingsForm extends Application
 
         try
         {
-            root = FXMLLoader.load(getClass().getResource("/fxml/settings.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/speechbubble.fxml"));
         }
         catch (IOException e)
         {
@@ -26,14 +24,12 @@ public class SettingsForm extends Application
             return;
         }
 
-        Scene scene = new Scene(root, 600, 500);
+        Scene scene = new Scene(root, 600, 400);
 
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Paramètres");
+        primaryStage.setTitle("Ajout d'une bulle");
         primaryStage.initModality(Modality.APPLICATION_MODAL);
-
-        primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("/images/settings.png"))));
 
         primaryStage.showAndWait();
     }

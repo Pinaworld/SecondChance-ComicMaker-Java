@@ -1,14 +1,17 @@
 package org.comicteam.models.ballons;
 
-import javafx.scene.canvas.Canvas;
-import org.comicteam.layouts.ComicLayout;
-import org.comicteam.models.Text;
-import org.comicteam.models.ballons.pointers.BalloonPointer;
+import java.io.*;
 
-import java.io.Serializable;
+import org.comicteam.layouts.*;
+import org.comicteam.models.*;
+import org.comicteam.models.ballons.pointers.*;
 
-public final class SpeechBalloon extends Balloon implements Serializable {
-    public SpeechBalloon(Canvas canvas, ComicLayout layout, int background, Text text, BalloonPointer pointer) {
-        super(canvas, layout, background, text, pointer);
+import javafx.scene.canvas.*;
+
+public final class SpeechBalloon extends Balloon implements Serializable
+{
+    public SpeechBalloon (ComicPanel comicPanel, Canvas canvas, ComicLayout layout, int background, Text text, BalloonPointer pointer)
+    {
+        super(comicPanel, canvas, layout, background, text, pointer);
     }
 }

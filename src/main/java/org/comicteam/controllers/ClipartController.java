@@ -1,19 +1,16 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.ClipartHelper;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 
-public class ClipartController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+
+public class ClipartController
+{
     @Translate
     @FXML
     public Button searchButton;
@@ -39,13 +36,15 @@ public class ClipartController {
     //@FXML
     //private SVGPath svgPath;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(ClipartController.class, this);
         resultsScrollBar.setMax(0);
     }
 
     @FXML
-    public void searchButtonClick() {
+    public void searchButtonClick ()
+    {
         Thread t2 = new Thread(() -> {
             resultsScrollBar.setValue(0);
             resultsScrollBar.setMin(0);
@@ -54,13 +53,16 @@ public class ClipartController {
             boolean shown = false;
             int actual = 0;
 
-            while (resultsScrollBar.getMax() <= ClipartHelper.getLoadedPagesCount()) {
-                if (resultsScrollBar.getMax() == 1 && !shown) {
+            while (resultsScrollBar.getMax() <= ClipartHelper.getLoadedPagesCount())
+            {
+                if (resultsScrollBar.getMax() == 1 && !shown)
+                {
                     showImages();
                     shown = true;
                 }
 
-                if (actual != ClipartHelper.getLoadedPagesCount()) {
+                if (actual != ClipartHelper.getLoadedPagesCount())
+                {
                     resultsScrollBar.setMax(ClipartHelper.getLoadedPagesCount() - 1);
                     actual++;
                 }
@@ -75,62 +77,74 @@ public class ClipartController {
         t1.start();
     }
 
-    public void showImages() {
+    public void showImages ()
+    {
         Image topLeft = ClipartHelper.getImageTopLeft((int) resultsScrollBar.getValue());
         Image topRight = ClipartHelper.getImageTopRight((int) resultsScrollBar.getValue());
         Image bottomLeft = ClipartHelper.getImageBottomLeft((int) resultsScrollBar.getValue());
         Image bottomRight = ClipartHelper.getImageBottomRight((int) resultsScrollBar.getValue());
 
-        if (topLeft != null) {
+        if (topLeft != null)
+        {
             imageView00.setImage(topLeft);
         }
 
-        if (topRight != null) {
+        if (topRight != null)
+        {
             imageView01.setImage(topRight);
         }
 
-        if (bottomLeft != null) {
+        if (bottomLeft != null)
+        {
             imageView10.setImage(bottomLeft);
         }
 
-        if (bottomRight != null) {
+        if (bottomRight != null)
+        {
             imageView11.setImage(bottomRight);
         }
     }
 
     @FXML
-    public void resultsGridPaneScroll(ScrollEvent e) {
-        if (e.getDeltaY() > 0 && resultsScrollBar.getValue() > 0) {
+    public void resultsGridPaneScroll (ScrollEvent e)
+    {
+        if (e.getDeltaY() > 0 && resultsScrollBar.getValue() > 0)
+        {
             resultsScrollBar.decrement();
             showImages();
         }
 
-        if (e.getDeltaY() < 0 && resultsScrollBar.getValue() < resultsScrollBar.getMax()) {
+        if (e.getDeltaY() < 0 && resultsScrollBar.getValue() < resultsScrollBar.getMax())
+        {
             resultsScrollBar.increment();
             showImages();
         }
     }
 
     @FXML
-    public void imageView00Click() {
+    public void imageView00Click ()
+    {
         EditorController.controller.addImage(imageView00.getImage());
         WorkingController.controller.redrawComponentsTree();
     }
 
     @FXML
-    public void imageView01Click() {
+    public void imageView01Click ()
+    {
         EditorController.controller.addImage(imageView01.getImage());
         WorkingController.controller.redrawComponentsTree();
     }
 
     @FXML
-    public void imageView10Click() {
+    public void imageView10Click ()
+    {
         EditorController.controller.addImage(imageView10.getImage());
         WorkingController.controller.redrawComponentsTree();
     }
 
     @FXML
-    public void imageView11Click() {
+    public void imageView11Click ()
+    {
         EditorController.controller.addImage(imageView11.getImage());
         WorkingController.controller.redrawComponentsTree();
     }

@@ -1,19 +1,17 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.comicteam.CMFile;
-import org.comicteam.forms.PluginsForm;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
-import org.comicteam.helpers.PluginHelper;
-import org.comicteam.helpers.UpdateHelper;
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.forms.*;
+import org.comicteam.helpers.*;
 
-public class MenuController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class MenuController
+{
     public static MenuController controller;
 
     @Translate
@@ -40,8 +38,10 @@ public class MenuController {
     @FXML
     public VBox pluginsBox;
 
-    public void initialize() {
-        if (!UpdateHelper.newVersionIsAvailable()) {
+    public void initialize ()
+    {
+        if (!UpdateHelper.newVersionIsAvailable())
+        {
             updateButton.setVisible(false);
         }
 
@@ -52,8 +52,10 @@ public class MenuController {
     }
 
     @FXML
-    public void newProjectButtonClick() {
-        if (!CMFile.cmfile.saved) {
+    public void newProjectButtonClick ()
+    {
+        if (!CMFile.cmfile.saved)
+        {
             FXMLHelper.openSavingWarningForm();
         }
 
@@ -61,44 +63,55 @@ public class MenuController {
     }
 
     @FXML
-    public void openProjectButtonClick() {
-        if (!CMFile.cmfile.saved) {
+    public void openProjectButtonClick ()
+    {
+        if (!CMFile.cmfile.saved)
+        {
             FXMLHelper.openSavingWarningForm();
         }
 
-        if (FXMLHelper.openProject(openProjectButton)) {
+        if (FXMLHelper.openProject(openProjectButton))
+        {
             FXMLHelper.closeAllWindows(openProjectButton);
             FXMLHelper.openWorkingForm();
         }
     }
 
     @FXML
-    public void saveProjectButtonClick() {
+    public void saveProjectButtonClick ()
+    {
         FXMLHelper.saveProject();
     }
 
     @FXML
-    public void settingsButtonClick() {
+    public void settingsButtonClick ()
+    {
         FXMLHelper.openSettingsForm();
     }
 
     @FXML
-    public void pluginsButtonClick() {
+    public void pluginsButtonClick ()
+    {
         PluginsForm pf = new PluginsForm();
         pf.start(new Stage(StageStyle.DECORATED));
     }
 
     @FXML
-    public void quitButtonClick() {
-        if (!CMFile.cmfile.saved) {
+    public void quitButtonClick ()
+    {
+        if (!CMFile.cmfile.saved)
+        {
             FXMLHelper.openSavingWarningForm();
-        } else {
+        }
+        else
+        {
             FXMLHelper.closeAllWindows(quitButton);
         }
     }
 
     @FXML
-    public void updateButtonClick() {
+    public void updateButtonClick ()
+    {
         UpdateHelper.writeLatestVersionFile();
     }
 }

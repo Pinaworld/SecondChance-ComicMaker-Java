@@ -1,28 +1,29 @@
 package org.comicteam.helpers;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-import org.comicteam.controllers.EditorController;
-import org.comicteam.layouts.ComicPanel;
-import org.comicteam.layouts.Position;
-import org.comicteam.layouts.Size;
-import org.comicteam.models.ComicModel;
-import org.comicteam.models.Text;
-import org.comicteam.models.ballons.Balloon;
+import javax.imageio.*;
 
-import javax.imageio.ImageIO;
-import java.awt.image.RenderedImage;
+import java.awt.image.*;
 import java.io.*;
 
-public class CanvasHelper {
+import org.comicteam.controllers.*;
+import org.comicteam.layouts.*;
+import org.comicteam.models.*;
+import org.comicteam.models.ballons.*;
+
+import javafx.embed.swing.*;
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+
+public class CanvasHelper
+{
     private static Border blackBorder;
     private static Border blueBorder;
 
-    static {
+    static
+    {
         blackBorder = new Border(
                 new BorderStroke(
                         Paint.valueOf("BLACK"),
@@ -42,7 +43,8 @@ public class CanvasHelper {
         );
     }
 
-    public static Pane getPanel(ComicPanel panel) {
+    public static Pane getPanel (ComicPanel panel)
+    {
         Pane pane = new Pane();
         pane.setPrefWidth(MM.toPx(panel.getLayout().getSize().getHorizontal()));
         pane.setPrefHeight(MM.toPx(panel.getLayout().getSize().getVertical()));
@@ -53,19 +55,24 @@ public class CanvasHelper {
         return pane;
     }
 
-    public static void selectPanel(Pane panel) {
+    public static void selectPanel (Pane panel)
+    {
         unselectAllPanels();
         panel.setBorder(blueBorder);
     }
 
-    public static void unselectAllPanels() {
-        for (Node p : EditorController.controller.editorPane.getChildren()) {
+    public static void unselectAllPanels ()
+    {
+        for (Node p : EditorController.controller.editorPane.getChildren())
+        {
             ((Pane) p).setBorder(blackBorder);
         }
     }
 
-    public static Pane getBalloon(Balloon balloon) {
-        switch (balloon.getClass().getSimpleName()) {
+    public static Pane getBalloon (Balloon balloon)
+    {
+        switch (balloon.getClass().getSimpleName())
+        {
             case "SpeechBalloon":
                 return getSpeechBalloon(balloon);
             /*case "ThoughtBalloon":
@@ -77,8 +84,9 @@ public class CanvasHelper {
         }
     }
 
-    public static Pane getSpeechBalloon(Balloon balloon) {
-        Pane pane  = new Pane();
+    public static Pane getSpeechBalloon (Balloon balloon)
+    {
+        Pane pane = new Pane();
         pane.setLayoutX(balloon.getLayout().getPosition().getHorizontal());
         pane.setLayoutY(balloon.getLayout().getPosition().getVertical());
         pane.setPrefWidth(balloon.getLayout().getSize().getHorizontal());
@@ -104,7 +112,8 @@ public class CanvasHelper {
         return pane;
     }
 
-    public static Canvas getThoughtBalloon(Balloon balloon) {
+    public static Canvas getThoughtBalloon (Balloon balloon)
+    {
         Canvas canvas = new Canvas(
                 MM.toPx(balloon.getLayout().getSize().getHorizontal()),
                 MM.toPx(balloon.getLayout().getSize().getVertical())
@@ -113,7 +122,8 @@ public class CanvasHelper {
         return canvas;
     }
 
-    public static Pane getCaption(Balloon balloon) {
+    public static Pane getCaption (Balloon balloon)
+    {
         Pane paneCaption = new Pane();
         paneCaption.setLayoutX(MM.toPx(balloon.getLayout().getPosition().getHorizontal()));
         paneCaption.setLayoutY(MM.toPx(balloon.getLayout().getPosition().getVertical()));
@@ -140,7 +150,8 @@ public class CanvasHelper {
         return paneCaption;
     }
 
-    public static Canvas getText(Text text) {
+    public static Canvas getText (Text text)
+    {
         Canvas canvas = new Canvas();
 
         canvas.getGraphicsContext2D().setFont(text.getFont());
@@ -153,7 +164,8 @@ public class CanvasHelper {
         return canvas;
     }
 
-    public static void movePanel(Node node, ComicPanel panel, int x, int y) {
+    public static void movePanel (Node node, ComicPanel panel, int x, int y)
+    {
         node.setLayoutX(x);
         node.setLayoutY(y);
 
@@ -165,7 +177,8 @@ public class CanvasHelper {
         );
     }
 
-    public static void moveModel(Canvas canvas, ComicModel model, int x, int y) {
+    public static void moveModel (Canvas canvas, ComicModel model, int x, int y)
+    {
         canvas.setLayoutX(x);
         canvas.setLayoutY(y);
 
@@ -177,7 +190,8 @@ public class CanvasHelper {
         );
     }
 
-    public static void resizePanel(Node node, ComicPanel panel, int x, int y) {
+    public static void resizePanel (Node node, ComicPanel panel, int x, int y)
+    {
         ((Pane) node).setPrefWidth(x);
         ((Pane) node).setPrefHeight(y);
 
@@ -189,39 +203,38 @@ public class CanvasHelper {
         );
     }
 
-    public static void resizeModel(Canvas canvas, ComicModel model, int x, int y) {
-        double scaleX = x / MM.toPx(model.getLayout().getSize().getHorizontal());
-        double scaleY = y / MM.toPx(model.getLayout().getSize().getVertical());
+    public static void resizeModelPlus (Canvas canvas)
+    {
+        canvas.setScaleX(canvas.getScaleX() + 0.01);
+        canvas.setScaleY(canvas.getScaleY() + 0.01);
 
-        System.out.println(scaleX + "   " + scaleY);
+    }
 
-        canvas.setScaleX(scaleX);
-        canvas.setScaleY(scaleY);
-
-        model.getLayout().setSize(
-                new Size(
-                        MM.toMM(x),
-                        MM.toMM(y)
-                )
-        );
+    public static void resizeModelMinus (Canvas canvas)
+    {
+        canvas.setScaleX(canvas.getScaleX() - 0.01);
+        canvas.setScaleY(canvas.getScaleY() - 0.01);
     }
 
 
-
-    public static ByteArrayOutputStream writeCanvasFile(Canvas canvas) {
+    public static ByteArrayOutputStream writeCanvasFile (Canvas canvas)
+    {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         WritableImage wi = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
         canvas.snapshot(null, wi);
         RenderedImage ri = SwingFXUtils.fromFXImage(wi, null);
 
-        try {
+        try
+        {
             ImageIO.write(
                     ri,
                     "png",
                     baos
             );
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return null;
         }

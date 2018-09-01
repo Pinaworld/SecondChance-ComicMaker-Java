@@ -3,9 +3,11 @@ package org.comicteam.plugins.languages;
 import org.comicteam.annotations.Language;
 
 @Language
-public class English extends org.comicteam.plugins.languages.Language {
-    public English() {
-        super("English","1.0","English language");
+public class English extends org.comicteam.plugins.languages.Language
+{
+    public English ()
+    {
+        super("English", "1.0", "English language");
     }
 
     //MainController
@@ -78,12 +80,14 @@ public class English extends org.comicteam.plugins.languages.Language {
     private final String deletePluginButton = "Delete";
 
     @Override
-    public String getTranslation(String name) throws NoSuchFieldException, IllegalAccessException {
+    public String getTranslation (String name) throws NoSuchFieldException, IllegalAccessException
+    {
         return (String) getClass().getDeclaredField(name).get(this);
     }
 
     @Override
-    public void action() {
+    public void action ()
+    {
 
     }
 }

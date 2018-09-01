@@ -1,19 +1,17 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import org.comicteam.CMFile;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
-import org.comicteam.layouts.Size;
+import java.util.*;
 
-import java.util.Arrays;
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
+import org.comicteam.layouts.*;
 
-public class NewProjectController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class NewProjectController
+{
     @Translate
     @FXML
     public Label nameLabel;
@@ -43,13 +41,16 @@ public class NewProjectController {
     @FXML
     public Button createProjectButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(NewProjectController.class, this);
     }
 
     @FXML
-    public void createProjectButtonClick() {
-        if (!FXMLHelper.nameFieldCorrect(nameField) || !FXMLHelper.integerFieldCorrect(hSizeField) || !FXMLHelper.integerFieldCorrect(vSizeField)) {
+    public void createProjectButtonClick ()
+    {
+        if (!FXMLHelper.nameFieldCorrect(nameField) || !FXMLHelper.integerFieldCorrect(hSizeField) || !FXMLHelper.integerFieldCorrect(vSizeField))
+        {
             nameFieldKeyReleased();
             hSizeFieldKeyReleased();
             vSizeFieldKeyReleased();
@@ -74,17 +75,20 @@ public class NewProjectController {
     }
 
     @FXML
-    public void nameFieldKeyReleased() {
+    public void nameFieldKeyReleased ()
+    {
         FXMLHelper.setNameFieldBorder(nameField);
     }
 
     @FXML
-    public void hSizeFieldKeyReleased() {
+    public void hSizeFieldKeyReleased ()
+    {
         FXMLHelper.setSizeFieldBorder(hSizeField);
     }
 
     @FXML
-    public void vSizeFieldKeyReleased() {
+    public void vSizeFieldKeyReleased ()
+    {
         FXMLHelper.setSizeFieldBorder(vSizeField);
     }
 }

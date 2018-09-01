@@ -1,34 +1,41 @@
 package org.comicteam.layouts;
 
-import java.io.Serializable;
+import java.io.*;
 
-public class Position  implements Serializable {
+public class Position implements Serializable
+{
     private int horizontal;
     private int vertical;
 
-    public Position(int horizontal, int vertical) {
+    public Position (int horizontal, int vertical)
+    {
         this.horizontal = horizontal;
         this.vertical = vertical;
     }
 
-    public int getHorizontal() {
+    public int getHorizontal ()
+    {
         return horizontal;
     }
 
-    public void setHorizontal(int horizontal) {
+    public void setHorizontal (int horizontal)
+    {
         this.horizontal = horizontal;
     }
 
-    public int getVertical() {
+    public int getVertical ()
+    {
         return vertical;
     }
 
-    public void setVertical(int vertical) {
+    public void setVertical (int vertical)
+    {
         this.vertical = vertical;
     }
 
     @Override
-    public String toString() {
+    public String toString ()
+    {
         final StringBuilder sb = new StringBuilder("Position{");
         sb.append("horizontal=").append(horizontal);
         sb.append(", vertical=").append(vertical);

@@ -1,15 +1,14 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 
-public class RightClickModelController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+
+public class RightClickModelController
+{
     public static RightClickModelController controller;
 
     @Translate
@@ -22,26 +21,29 @@ public class RightClickModelController {
     @FXML
     private TextField modelNameField;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(RightClickModelController.class, this);
         modelNameField.setText(FXMLHelper.getSelectedModel().getName());
         controller = this;
     }
 
     @FXML
-    public void modelNameFieldReleased(KeyEvent e) {
-        if (e.getCode() == KeyCode.ENTER) {
+    public void modelNameFieldReleased (KeyEvent e)
+    {
+        if (e.getCode() == KeyCode.ENTER)
+        {
+            FXMLHelper.getSelectedModel().setName(modelNameField.getText());
+            System.out.println(FXMLHelper.getSelectedModel().getName());
             WorkingController.controller.redrawComponentsTree();
             WorkingController.controller.hideComponentsTreeRightClick();
-            return;
         }
 
-        FXMLHelper.getSelectedModel().setName(modelNameField.getText());
-        System.out.println(FXMLHelper.getSelectedModel().getName());
     }
 
     @FXML
-    public void deleteModelButtonClick() {
+    public void deleteModelButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         FXMLHelper.getPanelOfSelectedModel().getModels().remove(FXMLHelper.getSelectedModel());

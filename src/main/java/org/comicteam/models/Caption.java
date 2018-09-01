@@ -1,12 +1,15 @@
 package org.comicteam.models;
 
-import javafx.scene.canvas.Canvas;
-import org.comicteam.layouts.ComicLayout;
-import org.comicteam.models.ballons.Balloon;
-import org.comicteam.models.ballons.pointers.BalloonPointer;
+import org.comicteam.layouts.*;
+import org.comicteam.models.ballons.*;
+import org.comicteam.models.ballons.pointers.*;
 
-public final class Caption extends Balloon {
-    public Caption(Canvas canvas, ComicLayout layout, int background, Text text, BalloonPointer pointer) {
-        super(canvas, layout, background, text, pointer);
+import javafx.scene.canvas.*;
+
+public final class Caption extends Balloon
+{
+    public Caption (ComicPanel comicPanel, Canvas canvas, ComicLayout layout, int background, Text text, BalloonPointer pointer)
+    {
+        super(comicPanel, canvas, layout, background, text, pointer);
     }
 }

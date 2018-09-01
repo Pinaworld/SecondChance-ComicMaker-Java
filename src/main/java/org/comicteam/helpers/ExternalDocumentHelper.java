@@ -1,23 +1,27 @@
 package org.comicteam.helpers;
 
-import javafx.scene.Node;
-import javafx.scene.image.Image;
+import java.io.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import javafx.scene.*;
+import javafx.scene.image.*;
 
-public class ExternalDocumentHelper {
-    public static Image getImage(Node node) {
+public class ExternalDocumentHelper
+{
+    public static Image getImage (Node node)
+    {
         File file = FXMLHelper.chooseFile(node);
 
-        if (file == null) {
+        if (file == null)
+        {
             return null;
         }
 
-        try {
+        try
+        {
             return new Image(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             return null;
         }
     }

@@ -1,14 +1,12 @@
 package org.comicteam;
 
-import org.comicteam.layouts.ComicPage;
-import org.comicteam.layouts.Size;
+import java.io.*;
+import java.util.*;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import org.comicteam.layouts.*;
 
-public class ComicBook implements Serializable {
+public class ComicBook implements Serializable
+{
     private String name;
     private String serie;
     private List<String> authors;
@@ -16,12 +14,14 @@ public class ComicBook implements Serializable {
     private Size size;
     private List<ComicPage> pages;
 
-    public ComicBook(String name, String serie, List<String> authors, String description, Size size, List<ComicPage> pages) {
+    public ComicBook (String name, String serie, List<String> authors, String description, Size size, List<ComicPage> pages)
+    {
         this(name, serie, authors, description, size);
         this.pages = pages;
     }
 
-    public ComicBook(String name, String serie, List<String> authors, String description, Size size) {
+    public ComicBook (String name, String serie, List<String> authors, String description, Size size)
+    {
         this.name = name;
         this.serie = serie;
         this.authors = authors;
@@ -30,73 +30,90 @@ public class ComicBook implements Serializable {
         pages = new ArrayList<>();
     }
 
-    public void sortPages() {
+    public void sortPages ()
+    {
         Collections.sort(pages);
 
         int i = 0;
 
-        for (ComicPage page : pages) {
+        for (ComicPage page : pages)
+        {
             page.setIndex(i);
             i++;
         }
     }
 
-    public void sortPanels() {
-        for (ComicPage page : pages) {
+    public void sortPanels ()
+    {
+        for (ComicPage page : pages)
+        {
             Collections.sort(page.getPanels());
         }
     }
 
-    public String getName() {
+    public String getName ()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name)
+    {
         this.name = name;
     }
 
-    public String getSerie() {
+    public String getSerie ()
+    {
         return serie;
     }
 
-    public void setSerie(String serie) {
+    public void setSerie (String serie)
+    {
         this.serie = serie;
     }
 
-    public List<String> getAuthors() {
+    public List<String> getAuthors ()
+    {
         return authors;
     }
 
-    public void setAuthors(List<String> authors) {
+    public void setAuthors (List<String> authors)
+    {
         this.authors = authors;
     }
 
-    public String getDescription() {
+    public String getDescription ()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription (String description)
+    {
         this.description = description;
     }
 
-    public List<ComicPage> getPages() {
+    public List<ComicPage> getPages ()
+    {
         return pages;
     }
 
-    public void setPages(List<ComicPage> pages) {
+    public void setPages (List<ComicPage> pages)
+    {
         this.pages = pages;
     }
 
-    public Size getSize() {
+    public Size getSize ()
+    {
         return size;
     }
 
-    public void setSize(Size size) {
+    public void setSize (Size size)
+    {
         this.size = size;
     }
 
     @Override
-    public String toString() {
+    public String toString ()
+    {
         final StringBuilder sb = new StringBuilder("ComicBook{");
         sb.append("name='").append(name).append('\'');
         sb.append(", serie='").append(serie).append('\'');

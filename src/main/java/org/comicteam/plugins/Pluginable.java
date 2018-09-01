@@ -1,9 +1,12 @@
 package org.comicteam.plugins;
 
-public interface Pluginable {
-    String getName();
-    String getVersion();
-    String getDescription();
+public interface Pluginable
+{
+    String getName ();
 
-    void action();
+    String getVersion ();
+
+    String getDescription ();
+
+    void action ();
 }

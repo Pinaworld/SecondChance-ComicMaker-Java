@@ -1,27 +1,31 @@
 package org.comicteam.forms;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import java.io.*;
 
-import java.io.IOException;
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
 
-public class ModelEditorForm extends Application {
+public class ModelEditorForm extends Application
+{
     @Override
-    public void start(Stage primaryStage) {
+    public void start (Stage primaryStage)
+    {
         Parent root;
 
-        try {
+        try
+        {
             root = FXMLLoader.load(getClass().getResource("/fxml/modeleditor.fxml"));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return;
         }
 
-        Scene scene  = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 800, 600);
 
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

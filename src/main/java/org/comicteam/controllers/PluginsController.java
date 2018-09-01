@@ -1,19 +1,17 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.stage.FileChooser;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.PluginHelper;
-import org.comicteam.plugins.Plugin;
+import java.nio.file.*;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
+import org.comicteam.plugins.*;
 
-public class PluginsController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+public class PluginsController
+{
     @FXML
     public Label pluginNameLabel;
     @FXML
@@ -29,39 +27,55 @@ public class PluginsController {
     @FXML
     public Button deletePluginButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(PluginsController.class, this);
 
         pluginsList.getItems().clear();
 
-        for (Class<?> c : PluginHelper.languages) {
-            try {
+        for (Class<?> c : PluginHelper.languages)
+        {
+            try
+            {
                 pluginsList.getItems().add(c.newInstance());
-            } catch (InstantiationException e) {
+            }
+            catch (InstantiationException e)
+            {
                 e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e)
+            {
                 e.printStackTrace();
             }
         }
 
-        for (Class<?> c : PluginHelper.plugins) {
-            try {
+        for (Class<?> c : PluginHelper.plugins)
+        {
+            try
+            {
                 pluginsList.getItems().add(c.newInstance());
-            } catch (InstantiationException e) {
+            }
+            catch (InstantiationException e)
+            {
                 e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e)
+            {
                 e.printStackTrace();
             }
         }
 
-        if (pluginsList.getItems().size() > 0) {
+        if (pluginsList.getItems().size() > 0)
+        {
             pluginsList.getSelectionModel().select(0);
             Plugin p = (Plugin) pluginsList.getSelectionModel().getSelectedItem();
 
             pluginNameLabel.setText(p.getName());
             pluginVersionLabel.setText(p.getVersion());
             pluginDescriptionLabel.setText(p.getDescription());
-        } else {
+        }
+        else
+        {
             pluginNameLabel.setText("");
             pluginVersionLabel.setText("");
             pluginDescriptionLabel.setText("");
@@ -76,7 +90,8 @@ public class PluginsController {
         });
     }
 
-    public void selectPlugin() {
+    public void selectPlugin ()
+    {
         Plugin p = (Plugin) pluginsList.getSelectionModel().getSelectedItem();
 
         pluginNameLabel.setText(p.getName());
@@ -85,7 +100,8 @@ public class PluginsController {
     }
 
     @FXML
-    public void addPluginButtonClick() {
+    public void addPluginButtonClick ()
+    {
         FileChooser chooser = new FileChooser();
         String filename = chooser.showOpenDialog(addPluginButton.getScene().getWindow()).getAbsolutePath();
 
@@ -98,7 +114,8 @@ public class PluginsController {
     }
 
     @FXML
-    public void deletePluginButtonClick() {
+    public void deletePluginButtonClick ()
+    {
         Plugin p = (Plugin) pluginsList.getSelectionModel().getSelectedItem();
 
         PluginHelper.deletePlugin(p);

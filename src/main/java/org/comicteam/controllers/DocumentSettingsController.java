@@ -1,17 +1,16 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import org.comicteam.CMFile;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
+import java.util.*;
 
-import java.util.Arrays;
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 
-public class DocumentSettingsController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class DocumentSettingsController
+{
     @Translate
     @FXML
     public Label nameLabel;
@@ -34,14 +33,16 @@ public class DocumentSettingsController {
     @FXML
     private TextArea descriptionArea;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(DocumentSettingsController.class, this);
 
         nameField.setText(CMFile.cmfile.book.getName());
         serieField.setText(CMFile.cmfile.book.getSerie());
 
         StringBuilder builder = new StringBuilder();
-        for (String author : CMFile.cmfile.book.getAuthors()) {
+        for (String author : CMFile.cmfile.book.getAuthors())
+        {
             builder.append(author).append("\n");
         }
         authorsArea.setText(builder.toString());
@@ -50,8 +51,10 @@ public class DocumentSettingsController {
     }
 
     @FXML
-    public void nameFieldKeyReleased() {
-        if (!nameField.getText().isEmpty()) {
+    public void nameFieldKeyReleased ()
+    {
+        if (!nameField.getText().isEmpty())
+        {
             CMFile.cmfile.book.setName(nameField.getText());
             CMFile.cmfile.saved = false;
         }
@@ -60,19 +63,22 @@ public class DocumentSettingsController {
     }
 
     @FXML
-    public void serieFieldKeyReleased() {
+    public void serieFieldKeyReleased ()
+    {
         CMFile.cmfile.book.setSerie(serieField.getText());
         CMFile.cmfile.saved = false;
     }
 
     @FXML
-    public void authorsAreaKeyReleased() {
+    public void authorsAreaKeyReleased ()
+    {
         CMFile.cmfile.book.setAuthors(Arrays.asList(authorsArea.getText().split("\n")));
         CMFile.cmfile.saved = false;
     }
 
     @FXML
-    public void descriptionAreaKeyReleased() {
+    public void descriptionAreaKeyReleased ()
+    {
         CMFile.cmfile.book.setDescription(descriptionArea.getText());
         CMFile.cmfile.saved = false;
     }

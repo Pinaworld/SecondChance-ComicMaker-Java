@@ -1,50 +1,71 @@
 package org.comicteam.layouts;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-public class ComicPage implements Serializable, Comparable {
+public class ComicPage implements Serializable, Comparable
+{
     private int index;
+    protected String name;
     private List<ComicPanel> panels;
 
-    public ComicPage(int index) {
+    public ComicPage (int index)
+    {
         this.index = index;
         panels = new ArrayList<>();
     }
 
-    public ComicPage(int index, List<ComicPanel> panels) {
+    public ComicPage (int index, List<ComicPanel> panels)
+    {
         this(index);
         this.panels = panels;
     }
 
-    public int getIndex() {
+    public int getIndex ()
+    {
         return index;
     }
 
-    public void setIndex(int index) {
+    public String getName ()
+    {
+        return name;
+    }
+
+    public void setIndex (int index)
+    {
         this.index = index;
     }
 
-    public List<ComicPanel> getPanels() {
+    public void setName (String name)
+    {
+        this.name = name;
+    }
+
+    public List<ComicPanel> getPanels ()
+    {
         return panels;
     }
 
-    public void setPanels(List<ComicPanel> panels) {
+    public void setPanels (List<ComicPanel> panels)
+    {
         this.panels = panels;
     }
 
     @Override
-    public String toString() {
+    public String toString ()
+    {
         return String.format("Page %s", index + 1);
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (((ComicPage) o).index < index) {
+    public int compareTo (Object o)
+    {
+        if (((ComicPage) o).index < index)
+        {
             return 1;
         }
-        if (((ComicPage) o).index > index) {
+        if (((ComicPage) o).index > index)
+        {
             return -1;
         }
 

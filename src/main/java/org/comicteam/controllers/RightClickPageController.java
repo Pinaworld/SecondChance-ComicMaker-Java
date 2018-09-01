@@ -1,15 +1,16 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
-import org.comicteam.CMFile;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 import org.comicteam.layouts.*;
 
-public class RightClickPageController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+
+public class RightClickPageController
+{
     public static RightClickPageController controller;
 
     @Translate
@@ -25,17 +26,24 @@ public class RightClickPageController {
     @FXML
     public Button downButton;
 
-    public void initialize() {
+
+    @FXML
+    private TextField pageNameField;
+
+    public void initialize ()
+    {
         TranslateProcessor.translate(RightClickPageController.class, this);
+
         controller = this;
     }
 
     @FXML
-    public void deletePageButtonClick() {
+    public void deletePageButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         CMFile.cmfile.book.getPages().remove(
-                ((TreeItem)WorkingController.controller.componentsTree.getSelectionModel().getSelectedItem()).getValue()
+                ((TreeItem) WorkingController.controller.componentsTree.getSelectionModel().getSelectedItem()).getValue()
         );
 
         CMFile.cmfile.saved = false;
@@ -45,7 +53,8 @@ public class RightClickPageController {
     }
 
     @FXML
-    public void addPanelButtonClick() {
+    public void addPanelButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         ComicLayout layout = new ComicLayout(
@@ -58,7 +67,7 @@ public class RightClickPageController {
 
         ComicPanel panel = new ComicPanel(layout);
 
-        ((ComicPage)((TreeItem) WorkingController.controller.componentsTree.getSelectionModel().getSelectedItem()).getValue()).getPanels().add(
+        ((ComicPage) ((TreeItem) WorkingController.controller.componentsTree.getSelectionModel().getSelectedItem()).getValue()).getPanels().add(
                 panel
         );
 
@@ -69,12 +78,14 @@ public class RightClickPageController {
     }
 
     @FXML
-    public void upButtonClick() {
+    public void upButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         int index = FXMLHelper.getSelectedComicPage().getIndex();
 
-        if (index > 0) {
+        if (index > 0)
+        {
             CMFile.cmfile.book.getPages().get(index).setIndex(index - 1);
             CMFile.cmfile.book.getPages().get(index - 1).setIndex(index);
 
@@ -84,17 +95,33 @@ public class RightClickPageController {
     }
 
     @FXML
-    public void downButtonClick() {
+    public void downButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         int index = FXMLHelper.getSelectedComicPage().getIndex();
 
-        if (index < CMFile.cmfile.book.getPages().size()) {
+        if (index < CMFile.cmfile.book.getPages().size())
+        {
             CMFile.cmfile.book.getPages().get(index).setIndex(index + 1);
             CMFile.cmfile.book.getPages().get(index + 1).setIndex(index);
 
             CMFile.cmfile.saved = false;
             WorkingController.controller.redrawComponentsTree();
         }
+    }
+
+    @FXML
+    public void pageNameFieldReleased (KeyEvent e)
+    {
+        if (e.getCode() == KeyCode.ENTER)
+        {
+            FXMLHelper.getSelectedComicPage().setName(pageNameField.getText());
+            System.out.println(FXMLHelper.getSelectedComicPage().getName());
+            WorkingController.controller.redrawComponentsTree();
+            WorkingController.controller.hideComponentsTreeRightClick();
+        }
+
+
     }
 }

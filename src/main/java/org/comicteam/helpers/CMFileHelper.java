@@ -1,5 +1,6 @@
 package org.comicteam.helpers;
 
-public class CMFileHelper {
+public class CMFileHelper
+{
 
 }

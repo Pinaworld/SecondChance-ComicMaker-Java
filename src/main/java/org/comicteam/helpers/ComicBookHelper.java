@@ -1,6 +1,7 @@
 package org.comicteam.helpers;
 
-public class ComicBookHelper {
+public class ComicBookHelper
+{
     //public static ComicBook openedBook;
     //public static boolean saved = true;
     //public static int currentPage = 0;

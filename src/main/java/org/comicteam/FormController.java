@@ -1,16 +1,10 @@
 package org.comicteam;
 
-import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import org.comicteam.helpers.CanvasHelper;
-import org.comicteam.helpers.ComicBookHelper;
-import org.comicteam.layouts.ComicPanel;
-import org.comicteam.models.ComicModel;
-import org.comicteam.models.ballons.Balloon;
+import javafx.fxml.*;
+import javafx.scene.layout.*;
 
-public class FormController {
+public class FormController
+{
     //Balloon balloon;
     //BalloonPointer pointer;
 
@@ -19,8 +13,9 @@ public class FormController {
     @FXML
     AnchorPane pane;
 
-    public void initialize() {
-       // canvas, layout, back, text, pointer
+    public void initialize ()
+    {
+        // canvas, layout, back, text, pointer
         /*pointer = new SpeechBalloonPointer(new ComicLayout(new Position(400, 400), null));
         balloon = new SpeechBalloon(
                 null,

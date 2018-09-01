@@ -1,28 +1,31 @@
 package org.comicteam.forms;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import java.io.*;
 
-import java.io.IOException;
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.stage.*;
 
-public class MenuForm extends Application {
+public class MenuForm extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start (Stage primaryStage)
+    {
         Parent root;
 
-        try {
+        try
+        {
             root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return;
         }
 
-        Scene scene  = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setX(50);
         primaryStage.setY(100);

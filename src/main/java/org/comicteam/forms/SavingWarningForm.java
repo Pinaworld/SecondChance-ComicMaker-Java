@@ -1,30 +1,34 @@
 package org.comicteam.forms;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import org.comicteam.controllers.SavingWarningController;
+import java.io.*;
 
-import java.io.IOException;
+import org.comicteam.controllers.*;
 
-public class SavingWarningForm extends Application {
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
+
+public class SavingWarningForm extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start (Stage primaryStage)
+    {
         Parent root;
 
-        try {
+        try
+        {
             root = FXMLLoader.load(getClass().getResource("/fxml/savingwarning.fxml"));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return;
         }
 
-        Scene scene  = new Scene(root, 600, 150);
+        Scene scene = new Scene(root, 600, 150);
 
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

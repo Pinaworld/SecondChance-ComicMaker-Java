@@ -1,11 +1,13 @@
 package org.comicteam.models.ballons.pointers;
 
-import org.comicteam.layouts.ComicLayout;
+import java.io.*;
 
-import java.io.Serializable;
+import org.comicteam.layouts.*;
 
-public final class SpeechBalloonPointer extends BalloonPointer implements Serializable {
-    public SpeechBalloonPointer(ComicLayout layout) {
+public final class SpeechBalloonPointer extends BalloonPointer implements Serializable
+{
+    public SpeechBalloonPointer (ComicLayout layout)
+    {
         super(layout);
     }
 }

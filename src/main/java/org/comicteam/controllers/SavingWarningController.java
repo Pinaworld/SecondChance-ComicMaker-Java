@@ -1,13 +1,13 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 
-public class SavingWarningController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class SavingWarningController
+{
     public static boolean mustCancel;
     public static SavingWarningController controller;
 
@@ -24,28 +24,32 @@ public class SavingWarningController {
     @FXML
     private Button cancelButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(SavingWarningController.class, this);
         mustCancel = false;
         controller = this;
     }
 
     @FXML
-    public void yesButtonClick() {
+    public void yesButtonClick ()
+    {
         FXMLHelper.saveProject();
         FXMLHelper.closeWindow(yesButton);
         FXMLHelper.closeAllWindows(WorkingController.controller.pane);
     }
 
     @FXML
-    public void noButtonClick() {
+    public void noButtonClick ()
+    {
         FXMLHelper.closeWindow(noButton);
         FXMLHelper.closeWindow(WorkingController.controller.pane);
         FXMLHelper.closeWindow(EditorController.controller.editorPane);
     }
 
     @FXML
-    public void cancelButtonClick() {
+    public void cancelButtonClick ()
+    {
         FXMLHelper.closeWindow(cancelButton);
         mustCancel = true;
     }

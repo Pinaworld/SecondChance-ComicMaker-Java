@@ -1,5 +1,6 @@
 package org.comicteam.helpers;
 
-public class ModelHelper {
+public class ModelHelper
+{
     //public static ComicBook currentBook;
 }

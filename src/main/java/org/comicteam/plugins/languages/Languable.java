@@ -1,7 +1,8 @@
 package org.comicteam.plugins.languages;
 
-import org.comicteam.plugins.Pluginable;
+import org.comicteam.plugins.*;
 
-public interface Languable extends Pluginable {
-    String getTranslation(String name) throws NoSuchFieldException, IllegalAccessException;
+public interface Languable extends Pluginable
+{
+    String getTranslation (String name) throws NoSuchFieldException, IllegalAccessException;
 }

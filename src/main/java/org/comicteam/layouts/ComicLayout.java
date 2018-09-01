@@ -1,34 +1,42 @@
 package org.comicteam.layouts;
 
-import java.io.Serializable;
+import java.io.*;
 
-public class ComicLayout implements Serializable {
+public class ComicLayout implements Serializable
+{
     private Position position;
     private Size size;
+    private ComicLayout layout;
 
-    public ComicLayout(Position position, Size size) {
+    public ComicLayout (Position position, Size size)
+    {
         this.position = position;
         this.size = size;
     }
 
-    public Position getPosition() {
+    public Position getPosition ()
+    {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition (Position position)
+    {
         this.position = position;
     }
 
-    public Size getSize() {
+    public Size getSize ()
+    {
         return size;
     }
 
-    public void setSize(Size size) {
+    public void setSize (Size size)
+    {
         this.size = size;
     }
 
     @Override
-    public String toString() {
+    public String toString ()
+    {
         final StringBuilder sb = new StringBuilder("ComicLayout{");
         sb.append("position=").append(position);
         sb.append(", size=").append(size);

@@ -1,37 +1,48 @@
 package org.comicteam.helpers;
 
-import org.comicteam.plugins.languages.Languable;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.comicteam.plugins.languages.*;
 
-public class LanguageHelper {
+public class LanguageHelper
+{
     private static List<Languable> languages;
 
-    static {
+    static
+    {
         languages = new ArrayList<>();
     }
 
-    public static List<Languable> getLanguagesAvailables() {
+    public static List<Languable> getLanguagesAvailables ()
+    {
         return languages;
     }
 
-    public static void addLanguage(Class c) {
-        try {
+    public static void addLanguage (Class c)
+    {
+        try
+        {
             Languable l = (Languable) c.newInstance();
             languages.add(l);
-        } catch (InstantiationException e) {
+        }
+        catch (InstantiationException e)
+        {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static Languable getCurrentLanguage() {
+    public static Languable getCurrentLanguage ()
+    {
         String sLanguage = SettingsHelper.get("language");
 
-        for (Languable l : languages) {
-            if (l.getName().equals(sLanguage)) {
+        for (Languable l : languages)
+        {
+            if (l.getName().equals(sLanguage))
+            {
                 return l;
             }
         }
@@ -39,11 +50,13 @@ public class LanguageHelper {
         return null;
     }
 
-    public static void clearLanguages() {
+    public static void clearLanguages ()
+    {
         languages.clear();
     }
 
-    public static String getTranslation(String name) throws NoSuchFieldException, IllegalAccessException {
+    public static String getTranslation (String name) throws NoSuchFieldException, IllegalAccessException
+    {
         return getCurrentLanguage().getTranslation(name);
     }
 }

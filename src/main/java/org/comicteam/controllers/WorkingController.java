@@ -1,31 +1,22 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import java.io.*;
+
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.forms.*;
+import org.comicteam.helpers.*;
+import org.comicteam.layouts.*;
+import org.comicteam.models.*;
+
+import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.comicteam.CMFile;
-import org.comicteam.forms.EditorForm;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.CanvasHelper;
-import org.comicteam.helpers.FXMLHelper;
-import org.comicteam.helpers.MM;
-import org.comicteam.layouts.ComicPage;
-import org.comicteam.layouts.ComicPanel;
-import org.comicteam.layouts.Position;
-import org.comicteam.layouts.Size;
-import org.comicteam.models.ComicModel;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 
-import java.io.IOException;
-
-public class WorkingController {
+public class WorkingController
+{
     private boolean menuOpened;
     public static WorkingController controller;
 
@@ -62,7 +53,8 @@ public class WorkingController {
     @FXML
     private Button measureButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(WorkingController.class, this);
         measurePane.setVisible(false);
 
@@ -71,31 +63,36 @@ public class WorkingController {
         EditorForm editor = new EditorForm();
         editor.start(new Stage(StageStyle.DECORATED));
 
-        if (CMFile.cmfile.book.getPages().size() > 0) {
+        if (CMFile.cmfile.book.getPages().size() > 0)
+        {
             selectPage(CMFile.cmfile.book.getPages().get(0));
         }
 
         controller = this;
     }
 
-    public void redrawComponentsTree() {
+    public void redrawComponentsTree ()
+    {
         componentsTree.setRoot(new TreeItem(CMFile.cmfile.book.getName()));
         componentsTree.getRoot().setExpanded(true);
 
         CMFile.cmfile.book.sortPages();
         CMFile.cmfile.book.sortPanels();
 
-        for (ComicPage page : CMFile.cmfile.book.getPages()) {
+        for (ComicPage page : CMFile.cmfile.book.getPages())
+        {
             TreeItem<Object> treePage = new TreeItem<>(page);
             componentsTree.getRoot().getChildren().add(treePage);
             componentsTree.getRoot().setExpanded(true);
 
-            for (ComicPanel panel : page.getPanels()) {
+            for (ComicPanel panel : page.getPanels())
+            {
                 TreeItem<Object> treePanel = new TreeItem<>(panel);
                 treePage.getChildren().add(treePanel);
                 treePage.setExpanded(true);
 
-                for (ComicModel model : panel.getModels()) {
+                for (ComicModel model : panel.getModels())
+                {
                     treePanel.getChildren().add(new TreeItem<>(model));
                     treePanel.setExpanded(true);
                 }
@@ -103,8 +100,10 @@ public class WorkingController {
         }
         componentsTree.refresh();
 
-        if (!currentPageLabel.getText().equals("")) {
-            if (Integer.valueOf(currentPageLabel.getText()) > CMFile.cmfile.book.getPages().size()) {
+        if (!currentPageLabel.getText().equals(""))
+        {
+            if (Integer.valueOf(currentPageLabel.getText()) > CMFile.cmfile.book.getPages().size())
+            {
                 currentPageLabel.setText(String.valueOf(CMFile.cmfile.book.getPages().size()));
             }
         }
@@ -112,7 +111,8 @@ public class WorkingController {
         pageCountLabel.setText(String.format("%s", CMFile.cmfile.book.getPages().size()));
     }
 
-    public void alimentateMeasurePane(ComicPanel panel) {
+    public void alimentateMeasurePane (ComicPanel panel)
+    {
         measurePane.setVisible(true);
         xField.setText(String.valueOf(panel.getLayout().getPosition().getHorizontal()));
         yField.setText(String.valueOf(panel.getLayout().getPosition().getVertical()));
@@ -120,7 +120,8 @@ public class WorkingController {
         heightField.setText(String.valueOf(panel.getLayout().getSize().getVertical()));
     }
 
-    public void alimentateMeasureModel(ComicModel model) {
+    public void alimentateMeasureModel (ComicModel model)
+    {
         measurePane.setVisible(true);
         xField.setText(String.valueOf(model.getLayout().getPosition().getHorizontal()));
         yField.setText(String.valueOf(model.getLayout().getPosition().getVertical()));
@@ -128,7 +129,8 @@ public class WorkingController {
         heightField.setText(String.valueOf(model.getLayout().getSize().getVertical()));
     }
 
-    public boolean canMovePanel(ComicPanel panel, int x, int y) {
+    public boolean canMovePanel (ComicPanel panel, int x, int y)
+    {
         boolean xok = x + panel.getLayout().getSize().getHorizontal() <= MM.toMM((int) EditorController.controller.editorPane.getWidth());
         boolean yok = y + panel.getLayout().getSize().getVertical() <= MM.toMM((int) EditorController.controller.editorPane.getHeight());
 
@@ -136,13 +138,17 @@ public class WorkingController {
     }
 
     @FXML
-    public void measureButtonClick() {
+    public void measureButtonClick ()
+    {
         if (FXMLHelper.integerFieldCorrect(xField) && FXMLHelper.integerFieldCorrect(yField)
-                && FXMLHelper.integerFieldCorrect(widthField) && FXMLHelper.integerFieldCorrect(heightField)) {
+                && FXMLHelper.integerFieldCorrect(widthField) && FXMLHelper.integerFieldCorrect(heightField))
+        {
 
-            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName()) {
+            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName())
+            {
                 case "ComicPanel":
-                    if (canMovePanel(FXMLHelper.getSelectedComicPanel(), Integer.valueOf(xField.getText()), Integer.valueOf(yField.getText()))) {
+                    if (canMovePanel(FXMLHelper.getSelectedComicPanel(), Integer.valueOf(xField.getText()), Integer.valueOf(yField.getText())))
+                    {
                         FXMLHelper.getSelectedComicPanel().getLayout().setPosition(
                                 new Position(
                                         Integer.valueOf(xField.getText()),
@@ -188,36 +194,48 @@ public class WorkingController {
     }
 
     @FXML
-    public void menuButtonClick() {
-        if (!menuOpened) {
-            try {
+    public void menuButtonClick ()
+    {
+        if (!menuOpened)
+        {
+            try
+            {
                 menuPane = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
                 pane.getChildren().add(menuPane);
                 menuOpened = true;
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
-        } else {
+        }
+        else
+        {
             pane.getChildren().remove(menuPane);
             menuOpened = false;
         }
     }
 
     @FXML
-    public void previousPageClick() {
-        if (CMFile.cmfile.currentPage > 0) {
+    public void previousPageClick ()
+    {
+        if (CMFile.cmfile.currentPage > 0)
+        {
             selectPage(CMFile.cmfile.book.getPages().get(CMFile.cmfile.currentPage - 1));
         }
     }
 
     @FXML
-    public void nextPageClick() {
-        if (CMFile.cmfile.currentPage < CMFile.cmfile.book.getPages().size() - 1) {
+    public void nextPageClick ()
+    {
+        if (CMFile.cmfile.currentPage < CMFile.cmfile.book.getPages().size() - 1)
+        {
             selectPage(CMFile.cmfile.book.getPages().get(CMFile.cmfile.currentPage + 1));
         }
     }
 
-    public void selectPage(ComicPage page) {
+    public void selectPage (ComicPage page)
+    {
         EditorController.controller.showPage(page);
 
         currentPageLabel.setText(String.valueOf(CMFile.cmfile.currentPage + 1));
@@ -227,11 +245,14 @@ public class WorkingController {
     }
 
     @FXML
-    public void componentsTreeClick(MouseEvent e) {
-        if (e.getButton() == MouseButton.PRIMARY) {
+    public void componentsTreeClick (MouseEvent e)
+    {
+        if (e.getButton() == MouseButton.PRIMARY)
+        {
             hideComponentsTreeRightClick();
 
-            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName()) {
+            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName())
+            {
                 case "ComicPage":
                     selectPage(FXMLHelper.getSelectedComicPage());
                     measurePane.setVisible(false);
@@ -250,8 +271,10 @@ public class WorkingController {
             }
         }
 
-        if (e.getButton() == MouseButton.SECONDARY) {
-            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName()) {
+        if (e.getButton() == MouseButton.SECONDARY)
+        {
+            switch (FXMLHelper.getClassOfSelectedObject().getSimpleName())
+            {
                 case "ComicPage":
                     showPageRightClick("rightClickPage", e.getX(), e.getY());
                     break;
@@ -259,7 +282,8 @@ public class WorkingController {
                     showPageRightClick("rightClickPanel", e.getX(), e.getY());
                     break;
                 default:
-                    switch (FXMLHelper.getClassOfSelectedObject().getSimpleName()) {
+                    switch (FXMLHelper.getClassOfSelectedObject().getSimpleName())
+                    {
                         case "ComicModel":
                         case "Balloon":
                             showPageRightClick("rightClickModel", e.getX(), e.getY());
@@ -274,8 +298,10 @@ public class WorkingController {
         }
     }
 
-    public void showPageRightClick(String fxml, double x, double y) {
-        try {
+    public void showPageRightClick (String fxml, double x, double y)
+    {
+        try
+        {
             hideComponentsTreeRightClick();
 
             rightClickBox = FXMLLoader.load(getClass().getResource(String.format("/fxml/%s.fxml", fxml)));
@@ -283,13 +309,17 @@ public class WorkingController {
             rightClickBox.setLayoutY(y + 50);
 
             pane.getChildren().add(rightClickBox);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void hideComponentsTreeRightClick() {
-        if (rightClickBox != null) {
+    public void hideComponentsTreeRightClick ()
+    {
+        if (rightClickBox != null)
+        {
             pane.getChildren().remove(rightClickBox);
             rightClickBox = null;
         }

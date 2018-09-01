@@ -1,12 +1,13 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.helpers.FXMLHelper;
+import org.comicteam.annotations.*;
+import org.comicteam.helpers.*;
 
-public class MainController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class MainController
+{
     public static MainController controller;
 
     @Translate
@@ -19,26 +20,31 @@ public class MainController {
     @FXML
     public Button settingsButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(MainController.class, this);
         controller = this;
     }
 
     @FXML
-    public void newProjectButtonMouseClick() {
+    public void newProjectButtonMouseClick ()
+    {
         FXMLHelper.openNewProjectForm();
     }
 
     @FXML
-    public void openProjectButtonMouseClick() {
-        if (FXMLHelper.openProject(openProjectButton)) {
+    public void openProjectButtonMouseClick ()
+    {
+        if (FXMLHelper.openProject(openProjectButton))
+        {
             FXMLHelper.closeAllWindows(openProjectButton);
             FXMLHelper.openWorkingForm();
         }
     }
 
     @FXML
-    public void settingsButtonMouseClick() {
+    public void settingsButtonMouseClick ()
+    {
         FXMLHelper.openSettingsForm();
     }
 }

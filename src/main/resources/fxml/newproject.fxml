@@ -1,64 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="511.0" prefWidth="600.0" style="-fx-background-color: #494747;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.comicteam.controllers.NewProjectController">
-   <children>
-      <Label fx:id="nameLabel" focusTraversable="false" layoutX="50.0" layoutY="38.0" text="Titre :" textFill="#d7d7d7" AnchorPane.leftAnchor="50.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nameField" layoutX="138.0" layoutY="40.0" onKeyReleased="#nameFieldKeyReleased" prefHeight="26.0" prefWidth="390.0" AnchorPane.rightAnchor="71.60000000000002" />
-      <Label fx:id="serieLabel" focusTraversable="false" layoutX="48.0" layoutY="78.0" text="Série :" textFill="#d7d7d7" AnchorPane.leftAnchor="48.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="serieField" layoutX="138.0" layoutY="80.0" prefHeight="26.0" prefWidth="390.0" AnchorPane.rightAnchor="71.60000000000002" />
-      <Label fx:id="authorsLabel" focusTraversable="false" layoutX="20.0" layoutY="153.0" text="Auteurs :" textFill="#d7d7d7" AnchorPane.leftAnchor="20.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="authorsArea" layoutX="138.0" layoutY="153.0" prefHeight="91.0" prefWidth="390.0" AnchorPane.rightAnchor="71.60000000000002" />
-      <Label fx:id="descriptionLabel" focusTraversable="false" layoutX="19.0" layoutY="277.0" text="Description :" textFill="#d7d7d7" AnchorPane.leftAnchor="19.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="descriptionArea" layoutX="138.0" layoutY="277.0" prefHeight="125.0" prefWidth="390.0" AnchorPane.rightAnchor="71.60000000000002" />
-      <Label focusTraversable="false" layoutX="33.0" layoutY="425.0" text="H Size :" textFill="#d7d7d7">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="hSizeField" layoutX="100.0" layoutY="427.0" onKeyReleased="#hSizeFieldKeyReleased" prefHeight="26.0" prefWidth="76.0" />
-      <Label focusTraversable="false" layoutX="184.0" layoutY="425.0" text="mm *" textFill="#d7d7d7">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label focusTraversable="false" layoutX="34.0" layoutY="462.0" text="V Size :" textFill="#d7d7d7">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TextField fx:id="vSizeField" layoutX="100.0" layoutY="464.0" onKeyReleased="#vSizeFieldKeyReleased" prefHeight="26.0" prefWidth="75.0" />
-      <Label focusTraversable="false" layoutX="184.0" layoutY="462.0" text="mm *" textFill="#d7d7d7">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="createProjectButton" layoutX="419.0" layoutY="432.0" mnemonicParsing="false" onAction="#createProjectButtonClick" prefHeight="40.0" prefWidth="154.0" style="-fx-background-color: darkgrey; -fx-background-radius: 10;" text="Créer le projet" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="511.0" prefWidth="600.0" style="-fx-background-color: #494747;"
+            xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.comicteam.controllers.NewProjectController">
+    <children>
+        <Label fx:id="nameLabel" focusTraversable="false" layoutX="50.0" layoutY="38.0" text="Titre :"
+               textFill="#d7d7d7" AnchorPane.leftAnchor="50.0">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="nameField" layoutX="138.0" layoutY="40.0" onKeyReleased="#nameFieldKeyReleased"
+                   prefHeight="26.0" prefWidth="390.0" AnchorPane.rightAnchor="71.60000000000002"/>
+        <Label fx:id="serieLabel" focusTraversable="false" layoutX="48.0" layoutY="78.0" text="Série :"
+               textFill="#d7d7d7" AnchorPane.leftAnchor="48.0">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="serieField" layoutX="138.0" layoutY="80.0" prefHeight="26.0" prefWidth="390.0"
+                   AnchorPane.rightAnchor="71.60000000000002"/>
+        <Label fx:id="authorsLabel" focusTraversable="false" layoutX="20.0" layoutY="153.0" text="Auteurs :"
+               textFill="#d7d7d7" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextArea fx:id="authorsArea" layoutX="138.0" layoutY="153.0" prefHeight="91.0" prefWidth="390.0"
+                  AnchorPane.rightAnchor="71.60000000000002"/>
+        <Label fx:id="descriptionLabel" focusTraversable="false" layoutX="19.0" layoutY="277.0" text="Description :"
+               textFill="#d7d7d7" AnchorPane.leftAnchor="19.0">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextArea fx:id="descriptionArea" layoutX="138.0" layoutY="277.0" prefHeight="125.0" prefWidth="390.0"
+                  AnchorPane.rightAnchor="71.60000000000002"/>
+        <Label focusTraversable="false" layoutX="33.0" layoutY="425.0" text="H Size :" textFill="#d7d7d7">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="hSizeField" layoutX="100.0" layoutY="427.0" onKeyReleased="#hSizeFieldKeyReleased"
+                   prefHeight="26.0" prefWidth="76.0"/>
+        <Label focusTraversable="false" layoutX="184.0" layoutY="425.0" text="mm *" textFill="#d7d7d7">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Label focusTraversable="false" layoutX="34.0" layoutY="462.0" text="V Size :" textFill="#d7d7d7">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="vSizeField" layoutX="100.0" layoutY="464.0" onKeyReleased="#vSizeFieldKeyReleased"
+                   prefHeight="26.0" prefWidth="75.0"/>
+        <Label focusTraversable="false" layoutX="184.0" layoutY="462.0" text="mm *" textFill="#d7d7d7">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
+        <Button fx:id="createProjectButton" layoutX="419.0" layoutY="432.0" mnemonicParsing="false"
+                onAction="#createProjectButtonClick" prefHeight="40.0" prefWidth="154.0"
+                style="-fx-background-color: darkgrey; -fx-background-radius: 10;" text="Créer le projet"
+                AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

@@ -1,18 +1,18 @@
 package org.comicteam;
 
-import javafx.scene.text.Font;
+import java.util.*;
+
+import org.comicteam.helpers.*;
 import org.comicteam.layouts.*;
-import org.comicteam.models.Caption;
-import org.comicteam.models.ComicModel;
+import org.comicteam.models.*;
 import org.comicteam.models.Text;
-import org.comicteam.models.ballons.Balloon;
-import org.comicteam.models.ballons.SpeechBalloon;
-import org.comicteam.models.ballons.pointers.SpeechBalloonPointer;
+import org.comicteam.models.ballons.*;
+import org.comicteam.models.ballons.pointers.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.scene.text.*;
 
-public class DodoStop {
+public class DodoStop
+{
     private static final String name = "Bulletin Météo";
     private static final String serie = "Les Profs";
     private static final String strAuthors = "Pica;Mauricet;Erroc";
@@ -20,14 +20,17 @@ public class DodoStop {
     private static final Size size = new Size(150, 150);
     private static List<String> authors;
 
-    static {
+    static
+    {
         authors = new ArrayList<>();
-        for (String author : strAuthors.split(";")) {
+        for (String author : strAuthors.split(";"))
+        {
             authors.add(author);
         }
     }
 
-    public static ComicBook getBook() {
+    public static ComicBook getBook ()
+    {
         List<ComicPage> pages = new ArrayList<>();
         pages.add(getPage());
         pages.add(new ComicPage(2));
@@ -46,11 +49,13 @@ public class DodoStop {
         );
     }
 
-    public static ComicPage getPage() {
-        return new ComicPage(  1, getPanels());
+    public static ComicPage getPage ()
+    {
+        return new ComicPage(1, getPanels());
     }
 
-    public static List<ComicPanel> getPanels() {
+    public static List<ComicPanel> getPanels ()
+    {
         List<ComicPanel> panels = new ArrayList<>();
         panels.add(getPanel1());
         panels.add(getPanel2());
@@ -59,7 +64,8 @@ public class DodoStop {
         return panels;
     }
 
-    public static ComicPanel getPanel1() {
+    public static ComicPanel getPanel1 ()
+    {
         ComicPanel panel = new ComicPanel(
                 new ComicLayout(
                         new Position(5, 5),
@@ -70,7 +76,8 @@ public class DodoStop {
         return panel;
     }
 
-    private static ComicPanel getPanel2() {
+    private static ComicPanel getPanel2 ()
+    {
         return new ComicPanel(
                 new ComicLayout(
                         new Position(50, 5),
@@ -79,7 +86,8 @@ public class DodoStop {
         );
     }
 
-    public static ComicPanel getPanel3() {
+    public static ComicPanel getPanel3 ()
+    {
         List<ComicModel> models = new ArrayList<>();
         models.add(getCaption());
         models.add(getSpeech());
@@ -88,13 +96,17 @@ public class DodoStop {
                 models,
                 new ComicLayout(
                         new Position(5, 50),
-                        new Size(100,40)
+                        new Size(100, 40)
                 )
         );
     }
 
-    public static Balloon getCaption() {
+    public static Balloon getCaption ()
+    {
+        ComicPanel comicPanel = FXMLHelper.getSelectedComicPanel();
+
         return new Caption(
+                comicPanel,
                 null,
                 new ComicLayout(
                         new Position(0, 0),
@@ -102,6 +114,7 @@ public class DodoStop {
                 ),
                 0,
                 new Text(
+                        comicPanel,
                         null,
                         null,
                         0,
@@ -112,8 +125,12 @@ public class DodoStop {
         );
     }
 
-    public static Balloon getSpeech() {
+    public static Balloon getSpeech ()
+    {
+        ComicPanel comicPanel = FXMLHelper.getSelectedComicPanel();
+
         return new SpeechBalloon(
+                comicPanel,
                 null,
                 new ComicLayout(
                         new Position(50, 30),
@@ -121,11 +138,12 @@ public class DodoStop {
                 ),
                 0,
                 new Text(
+                        comicPanel,
                         null,
                         null,
                         0,
                         "Ron\nZZZ...",
-                        new Font( "Arial", 10)
+                        new Font("Arial", 10)
                 ),
                 new SpeechBalloonPointer(
                         new ComicLayout(

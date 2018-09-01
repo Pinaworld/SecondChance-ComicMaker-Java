@@ -1,26 +1,29 @@
 package org.comicteam.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import org.comicteam.CMFile;
-import org.comicteam.annotations.Translate;
-import org.comicteam.annotations.TranslateProcessor;
-import org.comicteam.layouts.ComicPage;
+import org.comicteam.*;
+import org.comicteam.annotations.*;
+import org.comicteam.layouts.*;
 
-public class RightClickBookController {
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class RightClickBookController
+{
     public static RightClickBookController controller;
 
     @Translate
     @FXML
     public Button addPageButton;
 
-    public void initialize() {
+    public void initialize ()
+    {
         TranslateProcessor.translate(RightClickBookController.class, this);
         controller = this;
     }
 
     @FXML
-    public void addPageButtonClick() {
+    public void addPageButtonClick ()
+    {
         WorkingController.controller.hideComponentsTreeRightClick();
 
         CMFile.cmfile.book.getPages().add(
@@ -30,10 +33,17 @@ public class RightClickBookController {
         );
         CMFile.cmfile.saved = false;
 
-        if (CMFile.cmfile.book.getPages().size() == 1) {
+        if (CMFile.cmfile.book.getPages().size() == 1)
+        {
             WorkingController.controller.currentPageLabel.setText("1");
         }
 
         WorkingController.controller.redrawComponentsTree();
+    }
+
+    @FXML
+    public void renameBook ()
+    {
+
     }
 }

@@ -1,28 +1,31 @@
 package org.comicteam.forms;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import java.io.*;
 
-import java.io.IOException;
+import javafx.application.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.image.*;
+import javafx.stage.*;
 
-public class ClipartForm extends Application {
+public class ClipartForm extends Application
+{
     @Override
-    public void start(Stage primaryStage) {
+    public void start (Stage primaryStage)
+    {
         Parent root;
 
-        try {
+        try
+        {
             root = FXMLLoader.load(getClass().getResource("/fxml/clipart.fxml"));
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return;
         }
 
-        Scene scene  = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 600, 400);
 
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
